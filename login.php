@@ -13,6 +13,22 @@
     session_start();
     require_once 'config/config.php';
 
+    if (isset($_POST["login"])) {
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+
+        $auth = new Authenticate($conn);
+        if ($auth->login($email, $password)) {
+            if (isset($_SESSION["role"]) && $_SESSION["role"] == "teacher") {
+                echo "<script>location.href = 'teacher_dashboard.php'; alert('Login Successful!')</script>";
+            } else {
+                echo "<script>location.href = 'student_dashboard.php'; alert('Login Successful!')</script>";
+            }
+        } else {
+            echo "<script> alert('Login Failed!')</script>";
+        }
+    }
+
     ?>
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -22,7 +38,7 @@
                         <h3 class="text-center">Login</h3>
                     </div>
                     <div class="card-body">
-                        <form action="auth.php" method="POST">
+                        <form method="POST">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" required>
@@ -31,7 +47,7 @@
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" class="form-control" id="password" name="password" required>
                             </div>
-                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                            <button type="submit" name="login" class="btn btn-primary w-100">Login</button>
                         </form>
                     </div>
                 </div>

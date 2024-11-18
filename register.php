@@ -13,6 +13,19 @@
     session_start();
     require_once 'config/config.php';
 
+    $auth = new Authenticate($conn);
+    if (isset($_POST['register'])) {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $role = $_POST['role'];
+
+        if ($auth->register($email, $password, $role)) {
+            echo "<script>location.href = 'login.php'; alert('Registration Successful!')</script>";
+        } else {
+        }
+    } else {
+    }
+
     ?>
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -38,7 +51,7 @@
                                     <option>teacher</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                            <button type="submit" name="register" class="btn btn-primary w-100">Register</button>
                         </form>
                     </div>
                 </div>

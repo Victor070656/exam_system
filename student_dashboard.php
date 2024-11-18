@@ -47,7 +47,7 @@ $upcomingExams = $examManager->getUpcomingExams($userId);
                         <a class="nav-link" href="student_dashboard.php">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="results.php">Results</a>
+                        <a class="nav-link" href="view_result.php">Results</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="logout.php">Logout</a>
